@@ -26,8 +26,8 @@ class BlogController extends Controller
     public function create()
     {
         $category = Category::all();
-        // $blog = Blog::findOrFail(9);
-       
+        //$blog = Blog::findOrFail(9);
+       //dd($blog);
         return view('dashboard.blog', compact('category'));
     }
 

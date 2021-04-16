@@ -41,6 +41,9 @@ Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 Route::get('/test/blog',[BlogController::class, 'test'])->name('test.blog');
 
+//create user
+Route::get('dashboard/users',[UserController::class,'index'])->name('dashboard.users');
+
 
 
 
