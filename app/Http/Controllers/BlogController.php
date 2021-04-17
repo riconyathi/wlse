@@ -26,9 +26,9 @@ class BlogController extends Controller
     public function create()
     {
         $category = Category::all();
-        //$blog = Blog::findOrFail(9);
+        $blogs = Blog::all();
        //dd($blog);
-        return view('dashboard.blog', compact('category'));
+        return view('dashboard.blog', compact('category','blogs'));
     }
 
     /**
@@ -39,14 +39,22 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-     
+        $file = $request->blog_image;
+            
+
+        //get image name
+        $filename = $file->getClientOriginalName();
+        
+
+        //move image 
+        $file->move('storage\blog', $filename);
 
             $blog = new Blog([
                 'blog_title'=>$request->input('blog_title'),
                 'category_id' =>$request->input('blog_category'),
                 'user_id'=>$request->user()->id,
-                'body' => $request['blog-trixFields']['data'],
-                
+                'body' => $request->input('body'),
+                'blog_image' => $filename,
             ]);
              
 
@@ -88,7 +96,20 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data= $request->validate([
+            'blog_title' => 'required',
+            'body' => 'required',
+            'category'=>'required',         
+        ]);
+
+        //check for image
+        if($request->blog_image){
+           $data['blog_image'] = request('blog_image')->store('blogs');
+        }
+
+        Blog::whereId($id)->update($data);
+        return back()->with('completed', 'Blog updated successfully');
     }
 
     /**
@@ -99,7 +120,9 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+        return back()->with('completed', 'Blog successfully deleted');
     }
 
     public function test()

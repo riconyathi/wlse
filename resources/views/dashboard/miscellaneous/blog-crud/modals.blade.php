@@ -26,7 +26,12 @@
             </select>
           </div>
           </div>
-            @trix(\App\Model\Blog::class, 'data')
+          <div class="form-group col-sm-12">
+            <textarea name="body" id="" class="form-control"></textarea>
+          </div>
+          <div class="form-group col-sm-12">
+            <input type="file" name="blog_image" id="">
+          </div>
             <input type="submit" value="Create" class="mt-4 btn btn-sm  btn-primary float-right">
         </form>
         
