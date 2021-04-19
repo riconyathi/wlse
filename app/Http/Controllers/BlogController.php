@@ -27,7 +27,6 @@ class BlogController extends Controller
     {
         $category = Category::all();
         $blogs = Blog::all();
-       //dd($blog);
         return view('dashboard.blog', compact('category','blogs'));
     }
 
@@ -97,19 +96,19 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
 
-        $data= $request->validate([
+        $data= request()->validate([
             'blog_title' => 'required',
             'body' => 'required',
             'category'=>'required',         
         ]);
 
+
         //check for image
         if($request->blog_image){
            $data['blog_image'] = request('blog_image')->store('blogs');
         }
-
         Blog::whereId($id)->update($data);
-        return back()->with('completed', 'Blog updated successfully');
+        //return back()->with('completed', 'Blog updated successfully');
     }
 
     /**

@@ -111,9 +111,9 @@
            
             
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <a class="nav-link" href="{{ route('users.create') }}">
                 <i class="ni ni-archive-2 text-green"></i>
-                <span class="nav-link-text">Widgets</span>
+                <span class="nav-link-text">Users</span>
               </a>
             </li>
             <li class="nav-item">
@@ -141,7 +141,7 @@
  @yield('content')
  
  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
-  {{-- <script src="{{ asset('dash_assets/vendor/jquery/dist/jquery.min.js') }}"></script> --}}
+  <script src="{{ asset('dash_assets/vendor/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/js-cookie/js.cookie.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>

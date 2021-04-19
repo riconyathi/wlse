@@ -11,16 +11,14 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UpdateProfileController;
-
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-Route::post('/dashboard',[DashboardController::class,'update_profile']);
-Route::post('/profile_picture',[UpdateProfileController::class,'update'])->name('profile.change');
+
 
 Route::resource('vacancies', VacanciesController::class);
 Route::resource('category', CategoryController::class);
@@ -40,10 +38,17 @@ Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 
 Route::get('/test/blog',[BlogController::class, 'test'])->name('test.blog');
+Route::resource('users', UserController::class)->middleware('isAdmin');
 
 //create user
-Route::get('dashboard/users',[UserController::class,'index'])->name('dashboard.users');
+//Route::get('dashboard/users',[UserController::class,'index'])->name('dashboard.users');
+Route::middleware(['auth'])->group(function () {
 
+    
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::post('/dashboard',[DashboardController::class,'update_profile']);
+    Route::post('/profile_picture',[UpdateProfileController::class,'update'])->name('profile.change');
 
+});
 
 

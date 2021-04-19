@@ -21,7 +21,7 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" data-toggle="modal" data-target="#create_blog" class="btn btn-sm btn-neutral">Create Blog</a>
+              <a href="#" data-toggle="modal" data-target="#create_user" class="btn btn-sm btn-neutral">Add User</a>
              
             </div>
           </div>
@@ -37,7 +37,7 @@
         <div class="card-header border-0">
           <div class="row">
             <div class="col-6">
-              <h3 class="mb-0">Striped table</h3>
+              <h3 class="mb-0">Users</h3>
             </div>
             <div class="col-6 text-right">
               <a href="#" class="btn btn-sm btn-primary btn-round btn-icon" data-toggle="tooltip" data-original-title="Edit product">
@@ -53,35 +53,35 @@
             <thead class="thead-light">
               <tr>
                 <th>Created By</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Body</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>email</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
 
-              @foreach($blogs as $blog)
+              @foreach($users as $user)
                
                       <tr>
                         <td class="table-user">
                           <img src="{{ asset('dash_assets/img/theme/team-2.jpg') }}" class="avatar rounded-circle mr-3">
-                          <b>{{$blog->user->first_name}}</b>
+                          <b>{{$user->first_name}}</b>
                         </td>
                         <td>
-                          <span class="text-muted">{{$blog->blog_title}}</span>
+                          <span class="text-muted">{{$user->last_name}}</span>
                         </td>
                         <td>
-                          <span class="text-muted">{{$blog->category->category_name}}</span>
+                          <span class="text-muted">{{$user->role->name}}</span>
                         </td>
                         <td>
-                          {{$blog->body}}
+                          {{$user->email}}
                         </td>
                         <td class="table-actions">
-                          <a href="#!" class="table-action editVacancy" data-toggle="modal" data-target="#edit_blog{{$blog->id}}" data-original-title="Edit vacancy">
+                          <a href="#!" class="table-action editVacancy" data-toggle="modal" data-target="#edit_user{{$user->id}}" data-original-title="Edit vacancy">
                             <i class="fas fa-user-edit"></i>
                           </a>
-                    <form method="POST" action="{{ route('blog.destroy',$blog->id) }}" onclick="return confirm('Are you sure you want to delete this Blog')" 
+                    <form method="POST" action="{{ route('users.destroy',$user->id) }}" onclick="return confirm('Are you sure you want to delete this User')" 
                    class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete vacancy">
                 
                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
@@ -95,54 +95,54 @@
 
 
                       {{-- edit modal --}}
-  <div class="modal fade" id="edit_blog{{$blog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="edit_user{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit Blog</h5>
+          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit User</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="update_blog" action="{{route('blog.update',$blog->id)}}" method="POST" enctype="mutlipart/form-data">
+          <form class="update_blog" action="{{route('users.update',$user->id)}}" method="POST" enctype="mutlipart/form-data">
             @csrf
             @method('PATCH')
               <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                   <div class="form-group">
-                   <label >Blog Title</label>
-                    <input type="text" class="form-control" name="blog_title"  value="{{$blog->blog_title}}"  >
+                   <label >First Name</label>
+                    <input type="text" class="form-control" name="first_name"  value="{{$user->first_name}}"  >
                           
                    </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
-                 <label >Blog Category</label>
-                 <select name="category_id">
-                   <option value="{{$blog->category->id}}">{{$blog->category->category_name}}</option>
-                   @foreach($category as $categories)
-                   <option value="{{$categories->id}}">{{$categories->category_name}}</option> 
-                   @endforeach
-                   
-                 </select>
-              
+                 <label >Last Name</label>
+                  <input type="text" class="form-control" name="last_name"  value="{{$user->last_name}}"  >
                         
                  </div>
             </div>
-              
-              <div class="col-md-12">
-                  <div class="form-group">
-                   <textarea name="body" class="form-control" cols="30" rows="10">{{$blog->body}}</textarea>
-                   </div>
-              </div>              
-  
-              <div class="col-md-6">
-                  <div class="form-group">
-                   <label>Pic</label>
-                    <input type="file" name="blog_image" class="form-control" accept="image/*">
-                   </div>
-              </div>
+            <div class="col-md-6">
+              <div class="form-group">
+               <label >Role</label>
+                <select name="role" class="form-control" >
+                  <option value="{{$user->role->id}}">{{$user->role->name}}</option>
+                  @foreach($roles as $role)
+                  <option value="{{$role->id}}">{{$role->name}}</option> 
+                  @endforeach
+                  
+                </select>                      
+               </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+             <label >Email</label>
+              <input type="email" class="form-control" name="email"  value="{{$user->email}}"  >
+                    
+             </div>
+        </div>
+       
               </div>
           <div class="modal-footer">
           <button type="submit" class="btn btn-success" id="saveBtn"></span>&nbsp;Update</button>
@@ -165,7 +165,7 @@
    @include('dashboard/layouts/footer')
     </div>
   </div>
-  @include('dashboard/miscellaneous/blog-crud/modals')
+  @include('dashboard/miscellaneous/user-crud/modals')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
