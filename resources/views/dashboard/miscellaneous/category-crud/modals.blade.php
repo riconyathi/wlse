@@ -8,7 +8,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="category"  >
+          <form class="category" >
             @csrf
               <div class="row">
               <div class="col-md-12">

@@ -41,56 +41,28 @@ Be a leader with our various social empowerment programmes</h3>
 						<p class="heading-desc centered">Let’s Create Unlimited Websites With this Fancy Huge HTML Template, With Endless possibilities and very easy Customization, What else do you need to create all your websites, it is completely complete one.</p>
 						
 						<div class="row">
+
+						@if ($course->count())
+						@foreach ($course as $course)
+							
+						
 							<article class="fx col-md-4 feature-img2 animated fadeInUp" data-animate="fadeInUp" data-animation-delay="200" style="animation-delay: 200ms;">
 								<figure class="shape lg new-angle">
-									<img alt="" src="{{ asset('assets/images/portfolio/large/8.jpg') }}">
+									<img alt="" src="{{ asset('storage/course_pics/'.$course->course_image) }}">
 									<a href="#" class="shape new-angle"><span>+</span></a>
 								</figure>
 								<div class="feature-details2">
-									<h4 class="bold feature-head2 uppercase t-center">Short courses</h4>
-									<p class="t-center">Mauris in quam tristique, dignissim urna in, molestie felis. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio, at aliquet elit nulla sed. </p>
+									<h4 class="bold feature-head2 uppercase t-center">{{ $course->course_title }}</h4>
+
+									<p class="t-center" >{!!nl2br(str_replace(" ", " &nbsp;", $course->body))!!}</p>
 								</div>
 							</article>
-							<article class="fx col-md-4 feature-img2 animated fadeInUp" data-animate="fadeInUp" data-animation-delay="400" style="animation-delay: 400ms;">
-								<figure class="shape lg new-angle">
-									<img alt="" src="{{ asset('assets/images/portfolio/large/3.jpg') }}">
-									<a href="#" class="shape new-angle"><span>+</span></a>
-								</figure>
-								<div class="feature-details2">
-									<h4 class="bold feature-head2 uppercase t-center">IT Programmes</h4>
-									<p class="t-center">Mauris in quam tristique, dignissim urna in, molestie felis. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio, at aliquet elit nulla sed. </p>
-								</div>
-							</article>
-							<article class="fx col-md-4 feature-img2 animated fadeInUp" data-animate="fadeInUp" data-animation-delay="600" style="animation-delay: 600ms;">
-								<figure class="shape lg new-angle">
-									<img alt="" src="{{ asset('assets/images/portfolio/large/9.jpg') }}">
-									<a href="#" class="shape new-angle"><span>+</span></a>
-								</figure>
-								<div class="feature-details2">
-									<h4 class="bold feature-head2 uppercase t-center">Skills-based Vocational and Technical Programme (VET))</h4>
-									<p class="t-center">Mauris in quam tristique, dignissim urna in, molestie felis. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio, at aliquet elit nulla sed. </p>
-								</div>
-							</article>
-							<article class="fx col-md-4 feature-img2 animated fadeInUp" data-animate="fadeInUp" data-animation-delay="200" style="animation-delay: 200ms;">
-								<figure class="shape lg new-angle">
-									<img alt="" src="{{ asset('assets/images/portfolio/large/8.jpg') }}">
-									<a href="#" class="shape new-angle"><span>+</span></a>
-								</figure>
-								<div class="feature-details2">
-									<h4 class="bold feature-head2 uppercase t-center">Enterprise Development and Training support</h4>
-									<p class="t-center">Mauris in quam tristique, dignissim urna in, molestie felis. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio, at aliquet elit nulla sed. </p>
-								</div>
-							</article>
-							<article class="fx col-md-4 feature-img2 animated fadeInUp" data-animate="fadeInUp" data-animation-delay="400" style="animation-delay: 400ms;">
-								<figure class="shape lg new-angle">
-									<img alt="" src="{{ asset('assets/images/portfolio/large/3.jpg') }}">
-									<a href="#" class="shape new-angle"><span>+</span></a>
-								</figure>
-								<div class="feature-details2">
-									<h4 class="bold feature-head2 uppercase t-center">Gender Based Violence Program</h4>
-									<p class="t-center">Mauris in quam tristique, dignissim urna in, molestie felis. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio. Fusce tristique, elit nec vehicula imperdiet, eros est egestas odio, at aliquet elit nulla sed. </p>
-								</div>
-							</article>
+							@endforeach
+						@else
+							<p >No courses available at the moment</p>
+						@endif
+							
+							
 						</div>
 					</div>
 				</div>

@@ -20,8 +20,6 @@ class CategoryController extends Controller
     
 
     public function store(Request $request) {
-
-        dd($request);
      
         $request->validate([
            'category_name' => 'required'        
@@ -47,7 +45,7 @@ class CategoryController extends Controller
         ]);
 
         Category::whereId($id)->update($data);
-        return back()->with('completed', 'Category updated successfully');
+        return back()->with('success', 'Category updated successfully');
     }
 
     /**
@@ -60,6 +58,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return back()->with('completed', 'Category successfully deleted');
+        return back()->with('success', 'Category successfully deleted');
     }
 }

@@ -27,16 +27,11 @@
           </div>
             <div class="col-md-12">
                 <div class="form-group">
-                 <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
+                  <label >Description</label>
+                 <textarea name="body" class="form-control" required cols="30" rows="10"></textarea>
                  </div>
             </div>              
 
-            <div class="col-md-6">
-                <div class="form-group">
-                 <label>Pic</label>
-                  <input type="file" name="job_image" class="form-control" accept="image/*">
-                 </div>
-            </div>
             </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-success" id="saveBtn"></span>&nbsp;Create</button>

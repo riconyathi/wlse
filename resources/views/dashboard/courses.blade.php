@@ -58,7 +58,7 @@
               </tr>
             </thead>
             <tbody>
-              @if ($course->count() > 0)
+              @if ($course->count())
                 
               
       @foreach ($course as $course)
@@ -83,28 +83,28 @@
                           <a href="#!" class="table-action editVacancy" data-toggle="modal" data-target="#edit_course{{ $course->id }}" data-original-title="Edit vacancy">
                             <i class="fas fa-user-edit"></i>
                           </a>
-                    <form method="POST" action="{{ route('programs.destroy',$course->id) }}" onclick="return confirm('Are you sure you want to delete this course')" 
-                   class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete Course">
-                   <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                    <form onclick="return confirm('Are you sure you want to delete this course ??')" method="POST" action="{{ route('programs.destroy', $course->id) }}" class=" table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete Course">
+                   <button data-id="{{ $course->id }}" type="submit" class="delete_course btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                       @csrf
                       @method('DELETE')
                     </form>
                         </td>
                       </tr>
 
+                      
 
                       {{-- edit modal --}}
   <div class="modal fade" id="edit_course{{ $course->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit Job</h5>
+          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit Course</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="update_vacancy" action="{{ route('programs.update',$course->id) }}" method="POST" enctype="mutlipart/form-data">
+          <form  action="{{ route('programs.update',$course->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
               <div class="row">
@@ -121,18 +121,28 @@
                  <select class="form-control" name="category_id">
                    <option value="{{ $course->category->id }}">{{ $course->category->category_name }}</option>
                   @foreach ($category as $cate)
-                  <option value="{{ $cate->category_id }}">{{ $cate->category_name }}</option>
+                  <option value="{{ $cate->id }}">{{ $cate->category_name }}</option>
                   @endforeach
-                  
+                
+
                 </select>
                   
                  </div>
             </div>
-              <div class="col-md-12">
-                  <div class="form-group">
-                   <textarea name="body" class="form-control" cols="30" rows="10">{{ $course->body }}</textarea>
-                   </div>
-              </div>              
+          
+
+           <div class="col-md-12">
+                <div class="form-group">
+                 <textarea name="body" class="form-control" cols="30" rows="10">{{ $course->body }}</textarea>
+                 </div>
+            </div>   
+            <div class="col-md-12">
+              <div class="form-group">
+               <label for="pic">Picture</label><br>
+               <input type="file" name="course_image">
+               </div>
+          </div>             
+          
   
               </div>
           <div class="modal-footer">
@@ -145,6 +155,7 @@
     </div>
   </div>
   @endforeach 
+  {{-- {{ $course->links() }} --}}
   @else
   <p>No courses at the moment</p>
   @endif
@@ -175,13 +186,49 @@
           cache: false, // To unable request pages to be cached
           processData:false, 
           success:function(data){
-            //$("#spinner").fadeOut(500);
-            alert(data);
+            alert("Course successfully created");
            $('#create_course').modal('hide'); 		//then refresh page
+           //window.location.reload();
+          },
+          error:function(data){
+            alert("Something went wrong!!!");
+            $('#create_course').modal('hide'); 		//then refresh page
            //window.location.reload();
           }
           });
         });
+
+    //     $(document).on('click', '.delete_course', function(){
+    //       $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+    //       var id = $(this).data("id");
+          
+    //        var query = confirm("Are you sure you want to delete this course ?");
+    //        if (query == true) {
+    //       $.ajax({
+    //             type:"POST",
+    //             url: "programs.destroy"+id,                
+    //             data:{ id:id},
+    //             success:function(data){
+                 
+    //               alert("Course successfully deleted");
+                 
+    //             },
+                
+    //             error:function(data){
+    //               // $("#spinner").fadeOut(500);
+    //               alert("Sorry something went wrong");
+    //               console.log(xhr.responseText);
+                 
+    //             }
+
+    //           });
+    //           // console.log(xhr.responseText);
+    //     }
+    //     });
 
       
         
