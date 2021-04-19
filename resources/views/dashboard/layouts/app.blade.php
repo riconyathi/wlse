@@ -36,7 +36,7 @@
       <!-- Brand -->
       <div class="sidenav-header  d-flex  align-items-center">
         <a class="navbar-brand" href="dashboard.html">
-          <img src="{{ asset('dash_assets/img/brand/blue.png') }}" class="navbar-brand-img" alt="...">
+          <img src="{{ asset('assets/images/logo1.png') }}" class="navbar-brand-img" alt="...">
         </a>
         <div class=" ml-auto ">
           <!-- Sidenav toggler -->
@@ -81,57 +81,31 @@
                 <i class="ni ni-ui-04 text-info"></i>
                 <span class="nav-link-text">Blog</span>
               </a>
-              <div class="collapse" id="navbar-components">
-                <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
-                    <a href="buttons.html" class="nav-link">
-                      <span class="sidenav-mini-icon"> B </span>
-                      <span class="sidenav-normal"> Buttons </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="cards.html" class="nav-link">
-                      <span class="sidenav-mini-icon"> C </span>
-                      <span class="sidenav-normal"> Cards </span>
-                    </a>
-                  </li>
-
-                   <li class="nav-item">
-                    <a href="notifications.html" class="nav-link">
-                      <span class="sidenav-mini-icon"> C </span>
-                      <span class="sidenav-normal"> Notifications </span>
-                    </a>
-                  </li>
-              
-                 
-                </ul>
-              </div>
+             
             </li>
            
            
             
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('users.create') }}">
+              <a class="nav-link" href="{{ route('appreciation.index') }}">
                 <i class="ni ni-archive-2 text-green"></i>
-                <span class="nav-link-text">Users</span>
+                <span class="nav-link-text">Testimonials</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tables.html">
-                <i class="ni ni-chart-pie-35 text-info"></i>
-                <span class="nav-link-text">Tables</span>
-              </a>
+            <li class="nav-item" style="display: none">
+              <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <i class="ni ni-user-run"></i>
+                <button type="submit" class="btn btn-danger btn-sm">  Logout</button>
+              </form>
             </li>
+
+           
            
           </ul>
           <!-- Divider -->
           <hr class="my-3">
-          <!-- Heading -->
-          <h6 class="navbar-heading p-0 text-muted">
-            <span class="docs-normal">Documentation</span>
-            <span class="docs-mini">D</span>
-          </h6>
-        
+      
         </div>
       </div>
     </div>
@@ -140,8 +114,8 @@
 
  @yield('content')
  
- {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
-  <script src="{{ asset('dash_assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+
+   <script src="{{ asset('dash_assets/vendor/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/js-cookie/js.cookie.js') }}"></script>
   <script src="{{ asset('dash_assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
@@ -151,6 +125,12 @@
   <script src="{{ asset('dash_assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
   <!-- Argon JS -->
   <script src="{{ asset('dash_assets/js/argon.min5438.js?v=1.2.0') }}"></script>
+
+  <script>
+    $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-success").slideUp(500);
+});
+  </script>
  
  
  

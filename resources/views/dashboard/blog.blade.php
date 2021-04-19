@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.app')
 
+@trixassets
 
 @section('content')
   <div class="main-content" id="panel">
@@ -60,30 +61,27 @@
               </tr>
             </thead>
             <tbody>
-
-              @foreach($blogs as $blog)
-               
+          
                       <tr>
                         <td class="table-user">
                           <img src="{{ asset('dash_assets/img/theme/team-2.jpg') }}" class="avatar rounded-circle mr-3">
-                          <b>{{$blog->user->first_name}}</b>
+                          <b>John Michael</b>
                         </td>
                         <td>
-                          <span class="text-muted">{{$blog->blog_title}}</span>
+                          <span class="text-muted">somm</span>
                         </td>
                         <td>
-                          <span class="text-muted">{{$blog->category->category_name}}</span>
+                          <span class="text-muted">mmmmm</span>
                         </td>
                         <td>
-                          {{$blog->body}}
+                          <a id="ckeditor" name="ckeditor" href="#!" class="font-weight-bold">{{!! $blog->body !!}}</a>
                         </td>
                         <td class="table-actions">
-                          <a href="#!" class="table-action editVacancy" data-toggle="modal" data-target="#edit_blog{{$blog->id}}" data-original-title="Edit vacancy">
+                          <a href="#!" class="table-action editVacancy" data-toggle="modal" data-target="#edit_vacancy" data-original-title="Edit vacancy">
                             <i class="fas fa-user-edit"></i>
                           </a>
-                    <form method="POST" action="{{ route('blog.destroy',$blog->id) }}" onclick="return confirm('Are you sure you want to delete this Blog')" 
+                    <form method="POST" action="#" onclick="return confirm('Are you sure you want to delete this vacancy')" 
                    class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete vacancy">
-                
                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                       @csrf
                       @method('DELETE')
@@ -91,61 +89,51 @@
                         </td>
                       </tr>
 
-                      
-
 
                       {{-- edit modal --}}
-  <div class="modal fade" id="edit_blog{{$blog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="edit_vacancy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit Blog</h5>
+          <h5 class="modal-title order-table-title" id="exampleModalLabel">Edit Job</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="update_blog" action="{{route('blog.update',$blog->id)}}" method="POST" enctype="mutlipart/form-data">
+          <form class="update_vacancy" action="#" method="POST" enctype="mutlipart/form-data">
             @csrf
             @method('PATCH')
               <div class="row">
               <div class="col-md-12">
                   <div class="form-group">
-                   <label >Blog Title</label>
-                    <input type="text" class="form-control" name="blog_title"  value="{{$blog->blog_title}}"  >
+                   <label >Job Title</label>
+                    <input type="text" class="form-control" name="job_title"  value=""  >
                           
                    </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                 <label >Blog Category</label>
-                 <select name="category_id">
-                   <option value="{{$blog->category->id}}">{{$blog->category->category_name}}</option>
-                   @foreach($category as $categories)
-                   <option value="{{$categories->id}}">{{$categories->category_name}}</option> 
-                   @endforeach
-                   
-                 </select>
-              
-                        
+                 <label >Deadline</label>
+                  <input type="date" class="form-control" name="deadline" value="" >
+                  
                  </div>
             </div>
-              
               <div class="col-md-12">
                   <div class="form-group">
-                   <textarea name="body" class="form-control" cols="30" rows="10">{{$blog->body}}</textarea>
+                   <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                    </div>
               </div>              
   
               <div class="col-md-6">
                   <div class="form-group">
                    <label>Pic</label>
-                    <input type="file" name="blog_image" class="form-control" accept="image/*">
+                    <input type="file" name="job_image" class="form-control" accept="image/*">
                    </div>
               </div>
               </div>
           <div class="modal-footer">
-          <button type="submit" class="btn btn-success" id="saveBtn"></span>&nbsp;Update</button>
+          <button type="submit" class="btn btn-success" id="saveBtn"></span>&nbsp;Create</button>
         </div>		
         </form>
         </div>
@@ -153,7 +141,7 @@
       </div>
     </div>
   </div>
-  @endforeach
+
               
             </tbody>
           </table>
@@ -167,6 +155,9 @@
   </div>
   @include('dashboard/miscellaneous/blog-crud/modals')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  
+
 
 
 @endsection

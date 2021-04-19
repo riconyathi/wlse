@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="courses "enctype="mutlipart/form-data">
+        <form class="courses" enctype="multipart/form-data">
           @csrf
             <div class="row">
             <div class="col-md-12">
@@ -36,7 +36,14 @@
                 <label >Description</label>
                <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                </div>
-          </div>  
+          </div> 
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label >Image File</label><br>
+             <input type="file" name="course_image" accept="image/*">
+             </div>
+        </div> 
 
           
             </div>

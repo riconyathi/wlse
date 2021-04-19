@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Courses;
 
-class Category extends Model
+class Applicants extends Model
 {
     use HasFactory;
-
+    
     protected $fillable= [
-        'category_name'
+        'full_name',
+        'email',
+        'position',
+        'message',
+        'cv',  
     ];
-
-
-    public function courses(){
-       return $this->hasMany(Courses::class);
-    }
 }

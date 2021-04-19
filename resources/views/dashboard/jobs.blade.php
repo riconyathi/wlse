@@ -64,7 +64,7 @@
                       <tr>
                         <td class="table-user">
                           <img src="{{ asset('dash_assets/img/theme/team-2.jpg') }}" class="avatar rounded-circle mr-3">
-                          <b>John Michael</b>
+                          <b>{{ $job->user->first_name }}</b>
                         </td>
                         <td>
                           <span class="text-muted">{{ $job->job_title }}</span>
@@ -124,12 +124,6 @@
                    </div>
               </div>              
   
-              <div class="col-md-6">
-                  <div class="form-group">
-                   <label>Pic</label>
-                    <input type="file" name="job_image" class="form-control" accept="image/*">
-                   </div>
-              </div>
               </div>
           <div class="modal-footer">
           <button type="submit" class="btn btn-success" id="saveBtn"></span>&nbsp;Create</button>
@@ -170,10 +164,12 @@
           cache: false, // To unable request pages to be cached
           processData:false, 
           success:function(data){
-            //$("#spinner").fadeOut(500);
-            alert(data);
-           $('#create_vacancy').modal('hide'); 		//then refresh page
-           //window.location.reload();
+           alert('Vacancy successfully created');
+           $('#create_vacancy').modal('hide');          
+          },
+          error:function(data){
+           alert('An error occure');
+           $('#create_vacancy').modal('hide');          
           }
           });
         });

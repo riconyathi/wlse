@@ -150,7 +150,7 @@
                             <li><a href="{{ route('vacancies.index') }}">Jobs</a>
                                 
                             </li>
-                            <li><a href="{{ route('contact') }}">Contact</a>
+                            <li><a href="{{ route('contact.index') }}">Contact</a>
                             </li>
                             
                         

@@ -13,9 +13,10 @@ class VacanciesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('jobs');
+    public function index(){
+        $job = Jobs::all();
+        $job_select = Jobs::all();
+        return view('jobs', compact('job','job_select'));
     }
 
     /**
@@ -30,54 +31,49 @@ class VacanciesController extends Controller
 
    
     public function store(Request $request) {
-        // Validate the inputs
+      
         $request->validate([
             'job_title' => 'required',
             'deadline' => 'required',
-            'body'=>'required'
-           
+            'body'=>'required',
+                    
             
-        ]);
-            
-            $job = new Jobs([
-                "job_title" => $request->job_title,
-                'deadline' => $request->deadline,
-                'body' => $request->body,
-                'user_id'=>$request->user()->id
-            ]);
-
-            if($job->save()){
-                echo "Vacancy successfully created";
-            }else{
-               echo "An error occured";
+        ]);          
+    
+                Jobs::create([
+                  
+                    "job_title" => $request->job_title,
+                    "body" => $request->body,
+                    "deadline" => $request->deadline,
+                    'user_id'=>$request->user()->id                  
+                    
+                ]);  
+              
+                   
             }
-           
-           
-      
-       
-       //return back()->with('success','Vacancy successfully created');
-
-    }
+ 
 
 
    
     public function update(Request $request, $id){
-         $data = $request->validate([
-            'job_title' => 'required',
-            'deadline' => 'required',
-            'body'=>'required'
-        ]);
-    
-        
-        
+           $data = $request->validate([
+                'job_title' => 'required',
+                'deadline' => 'required',
+                'body'=>'required'
+            ]); 
+
         Jobs::whereId($id)->update($data);
-        return back()->with('completed', 'Vacancy updated');
-       }
+        return back()->with('success', 'Vacancy successfully updated');
+
+        
+       }     
     
 
     public function destroy($id) {
         $job = Jobs::findOrFail($id);
         $job->delete();
-        return back()->with('completed', 'Vacancy deleted');
+        return back()->with('success', 'Vacancy successfully deleted');
     }
+
+  
 }

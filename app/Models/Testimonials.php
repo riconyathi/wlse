@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
-class Role extends Model
+class Testimonials extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-
-        'name'
+        'title',
+        'user_id',
+        'body',
+        'testimonial_image',
     ];
 
-    public function User(){
-
-        return $this->hasMany(User::class);  
+    public function user(){
+        return $this->belongsTo(User::class); 
     }
 }

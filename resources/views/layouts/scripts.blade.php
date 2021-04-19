@@ -14,3 +14,9 @@
 <script type="text/javascript" src="{{ asset('assets/revolution/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+
+<script>
+    $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert").slideUp(500);
+});
+  </script>
